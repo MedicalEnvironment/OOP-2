@@ -1,0 +1,3 @@
+/Users/gasoline/CLionProjects/Elf Villag/cmake-build-debug/CMakeFiles/Elf_Villag.dir
+/Users/gasoline/CLionProjects/Elf Villag/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/gasoline/CLionProjects/Elf Villag/cmake-build-debug/CMakeFiles/rebuild_cache.dir
