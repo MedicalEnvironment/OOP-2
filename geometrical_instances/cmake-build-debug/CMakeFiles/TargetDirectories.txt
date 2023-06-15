@@ -1,0 +1,3 @@
+/Users/gasoline/CLionProjects/geometrical_instances/cmake-build-debug/CMakeFiles/geometrical_instances.dir
+/Users/gasoline/CLionProjects/geometrical_instances/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/gasoline/CLionProjects/geometrical_instances/cmake-build-debug/CMakeFiles/rebuild_cache.dir
