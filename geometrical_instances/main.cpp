@@ -1,7 +1,11 @@
 #include <iostream>
 #include <cmath>
 
-enum Color { None, Red, Blue, Green };
+enum class Color {
+    Red = 0,
+    Blue = 1,
+    Green = 2
+};
 
 class Shape {
 protected:
@@ -15,15 +19,39 @@ public:
     virtual double getArea() const = 0;
     virtual std::string getShapeType() const = 0;
     virtual std::string getDescription() const {
-        return getShapeType() + ": Color=" + std::to_string(color) + ", Area=" + std::to_string(getArea());
+        return getShapeType() + ": Color = " + getColorName(color) + ", Area = " + std::to_string(getArea());
     }
 
-    double getWidth() const {
+    virtual double getWidth() const {
         return 0.0; // Placeholder for base class
     }
 
     double getHeight() const {
         return 0.0; // Placeholder for base class
+    }
+
+    void displayCircumscribingRectangle() const {
+        double width = getWidth();
+        double height = getHeight();
+        double left = centerX - (width / 2.0);
+        double top = centerY - (height / 2.0);
+        double right = left + width;
+        double bottom = top + height;
+
+        std::cout << "Circumscribing Rectangle: Left = " << left << ", Top = " << top << ", Right = " << right << ", Bottom = " << bottom << std::endl;
+    }
+
+    std::string getColorName(Color c) const {
+        switch (c) {
+            case Color::Red:
+                return "Red";
+            case Color::Blue:
+                return "Blue";
+            case Color::Green:
+                return "Green";
+            default:
+                return "None";
+        }
     }
 };
 
@@ -41,14 +69,6 @@ public:
     std::string getShapeType() const override {
         return "Circle";
     }
-
-    double getWidth() const {
-        return radius * 2;
-    }
-
-    double getHeight() const {
-        return radius * 2;
-    }
 };
 
 class Square : public Shape {
@@ -65,14 +85,6 @@ public:
     std::string getShapeType() const override {
         return "Square";
     }
-
-    double getWidth() const {
-        return edgeLength;
-    }
-
-    double getHeight() const {
-        return edgeLength;
-    }
 };
 
 class EquilateralTriangle : public Shape {
@@ -88,14 +100,6 @@ public:
 
     std::string getShapeType() const override {
         return "Equilateral Triangle";
-    }
-
-    double getWidth() const {
-        return sideLength;
-    }
-
-    double getHeight() const {
-        return sideLength * std::sqrt(3) / 2;
     }
 };
 
@@ -114,14 +118,6 @@ public:
     std::string getShapeType() const override {
         return "Rectangle";
     }
-
-    double getWidth() const {
-        return width;
-    }
-
-    double getHeight() const {
-        return height;
-    }
 };
 
 int main() {
@@ -135,12 +131,12 @@ int main() {
     std::cout << "Enter center coordinates (x y): ";
     std::cin >> centerX >> centerY;
 
-    std::cout << "Enter color (0 = None, 1 = Red, 2 = Blue, 3 = Green): ";
+    std::cout << "Enter color (0 = Red, 1 = Blue, 2 = Green): ";
     int colorInput;
     std::cin >> colorInput;
     color = static_cast<Color>(colorInput);
 
-    Shape* shape = nullptr;
+    Shape* shape;
     if (shapeType == "circle") {
         std::cout << "Enter radius: ";
         std::cin >> dimension1;
@@ -164,6 +160,7 @@ int main() {
 
     if (shape) {
         std::cout << shape->getDescription() << std::endl;
+        shape->displayCircumscribingRectangle();
         delete shape;
     }
 
