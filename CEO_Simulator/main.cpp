@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <ctime>
 #include <cstdlib>
 
 class Employee {
@@ -11,17 +10,12 @@ protected:
 public:
     Employee(const std::string& employeeName) : name(employeeName) {}
 
-    virtual void performTask() = 0;
     virtual void receiveInstruction(int instruction) = 0;
 };
 
 class Worker : public Employee {
 public:
     Worker(const std::string& workerName) : Employee(workerName) {}
-
-    void performTask() override {
-        std::cout << "Worker " << name << " is performing a task." << std::endl;
-    }
 
     void receiveInstruction(int instruction) override {
         std::srand(instruction);
@@ -37,10 +31,6 @@ private:
 
 public:
     Manager(const std::string& managerName, const std::vector<Worker*>& employeeWorkers) : Employee(managerName), workers(employeeWorkers) {}
-
-    void performTask() override {
-        std::cout << "Manager " << name << " is performing a task." << std::endl;
-    }
 
     void receiveInstruction(int instruction) override {
         std::srand(instruction);
