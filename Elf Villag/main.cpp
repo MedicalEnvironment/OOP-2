@@ -33,7 +33,7 @@ public:
     int getTotalNeighbors() const {
         int neighbors = 0;
 
-        for (Branch* child : getChildBranches()) {
+        for (Branch* child : childBranches) {
             if (child->getElfName() != "")
                 neighbors++;
         }
@@ -83,7 +83,7 @@ void placeElves(Branch* branch) {
 
 int main() {
     // Generate the forest structure
-    Branch tree[5];
+    std::vector<Branch> tree(5);
     tree[0].addChildBranch(&tree[1]);
     tree[0].addChildBranch(&tree[2]);
     tree[0].addChildBranch(&tree[3]);
