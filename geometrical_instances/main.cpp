@@ -87,36 +87,23 @@ public:
     }
 };
 
-class EquilateralTriangle : public Shape {
+class Rectangle : public Square {
 private:
-    double sideLength;
-
-public:
-    EquilateralTriangle(double x, double y, Color c, double length) : Shape(x, y, c), sideLength(length) {}
-
-    double getArea() const override {
-        return sideLength * sideLength * std::sqrt(3) / 4;
-    }
-
-    std::string getShapeType() const override {
-        return "Equilateral Triangle";
-    }
-};
-
-class Rectangle : public Shape {
-private:
-    double width;
     double height;
 
 public:
-    Rectangle(double x, double y, Color c, double w, double h) : Shape(x, y, c), width(w), height(h) {}
+    Rectangle(double x, double y, Color c, double width, double h) : Square(x, y, c, width), height(h) {}
 
     double getArea() const override {
-        return width * height;
+        return getWidth() * height;
     }
 
     std::string getShapeType() const override {
         return "Rectangle";
+    }
+
+    double getHeight() const override {
+        return height;
     }
 };
 
@@ -124,7 +111,7 @@ int main() {
     double centerX, centerY, dimension1, dimension2;
     Color color;
 
-    std::cout << "Enter shape type (circle, square, triangle, rectangle): ";
+    std::cout << "Enter shape type (circle, square, rectangle): ";
     std::string shapeType;
     std::cin >> shapeType;
 
@@ -136,7 +123,7 @@ int main() {
     std::cin >> colorInput;
     color = static_cast<Color>(colorInput);
 
-    Shape* shape;
+    Shape* shape = nullptr;
     if (shapeType == "circle") {
         std::cout << "Enter radius: ";
         std::cin >> dimension1;
@@ -145,10 +132,6 @@ int main() {
         std::cout << "Enter edge length: ";
         std::cin >> dimension1;
         shape = new Square(centerX, centerY, color, dimension1);
-    } else if (shapeType == "triangle") {
-        std::cout << "Enter side length: ";
-        std::cin >> dimension1;
-        shape = new EquilateralTriangle(centerX, centerY, color, dimension1);
     } else if (shapeType == "rectangle") {
         std::cout << "Enter width and height: ";
         std::cin >> dimension1 >> dimension2;
